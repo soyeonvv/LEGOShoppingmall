@@ -1,0 +1,122 @@
+body { 
+  padding-top: 56px; 
+}
+
+.navbar {
+  background-color: #FFCF00;
+}
+
+.nav-link {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.nav-link:hover {
+  font-size: large;
+}
+
+.nav-link.active {
+  font-size: large;
+}
+
+#logo {
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 130px;
+  height: 64px;
+}
+
+#login {
+  margin-left: auto;
+  margin-right: 50px;
+  width: 60px;
+  height: 30px;
+  border: 3px solid #ffffff;
+  border-radius: 7px;
+  background-color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+#login:hover {
+  border: 3px solid #D01012;
+  background-color: #D01012;
+  color: #ffffff;
+}
+
+#logout {
+  
+  margin-right: 50px;
+  width: 80px;
+  height: 30px;
+  border: 3px solid #ffffff;
+  border-radius: 7px;
+  background-color: #ffffff;
+  text-align: center;
+  font-weight: bold;
+}
+
+#logout:hover {
+  border: 3px solid #D01012;
+  background-color: #D01012;
+  color: #ffffff;
+}
+
+#loginicon {
+  width: 50px;
+  height: 55px;
+}
+
+#loginmodal {
+  border: 3px solid #FFCF00;
+  border-radius: 10px;
+  width: 250px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+#loginmodal:hover {
+  background-color: #FFCF00;
+}
+
+#loginmodal > a {
+  text-decoration: none;
+  color: #000000;
+}
+
+#modal-footer {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#username {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+#hook_button {
+  background-color: #FFC107;
+  border-radius: 7px;
+  height: 27px; 
+  width: 70px; 
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+#hook_text { 
+  font-size: 13px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+footer {
+  background-color: #201D48;
+}
+
+footer p {
+  font-size: small;
+}

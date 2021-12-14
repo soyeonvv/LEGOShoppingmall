@@ -28,3 +28,9 @@ class Post(models.Model):
     pcs = models.IntegerField()
     # 제조사
     Manufacturer = models.ForeignKey(Manufacturer, null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'[{self.pk}]{self.product_name}'
+
+    def get_absolute_url(self):
+        return f'/shopping/{self.pk}/'
