@@ -10,6 +10,9 @@
   {% endif %}
   <!-- Product post-->
   <div class="container my-5">
+    {% if search_info %}
+    <div class="category-badge">{{ search_info }}</div>
+    {% endif %}
     {% if category %}
       <div class="category-badge">{{ category }}</div>
     {% endif %}
