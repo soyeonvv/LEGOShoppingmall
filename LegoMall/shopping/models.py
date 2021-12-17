@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
 
 # Create your models here.
 class Manufacturer(models.Model):
@@ -30,7 +32,7 @@ class Post(models.Model):
     # 간단한 설명
     hook_text = models.CharField(max_length=100, blank=True)
     # 상품 설명
-    content = models.TextField()
+    content = MarkdownxField()
     # 상품 이미지
     head_image = models.ImageField(upload_to='lego/images/', blank=True)
     # 가격
@@ -51,3 +53,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/shopping/{self.pk}/'
+
+    def get_content_markdown(self):
+        return markdown(self.content)
