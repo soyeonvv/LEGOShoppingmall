@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .models import Post, Category
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 # Create your views here.
 
@@ -25,6 +25,10 @@ class PostDetail(DetailView):
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
+
+class PostCreate(CreateView):
+    model = Post
+    fields = ['product_name', 'hook_text', 'content', 'head_image', 'price', 'age', 'pcs', 'Manufacturer', 'category']
 
 def category_page(request, slug):
     if slug == 'no_category' :
