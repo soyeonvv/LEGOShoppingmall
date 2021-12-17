@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Manufacturer(models.Model):
@@ -42,6 +43,8 @@ class Post(models.Model):
     Manufacturer = models.ForeignKey(Manufacturer, null=True, blank=True, on_delete=models.CASCADE)
     # 카테고리
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    # 작성자
+    author = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'[{self.pk}]{self.product_name} - {self.Manufacturer}'

@@ -7,6 +7,11 @@
         <img src="{{ post.head_image.url }}" class="card-img-top" alt="{{ post.product_name }}의 이미지">
       </div>
       <div class="col-4">
+        {% if user.is_authenticated and user == post.author %}
+          <a href="/shopping/update_post/{{post.pk}}/" class="btn btn-info btn-sm float-right">
+            상품 수정
+          </a>
+        {% endif %}
         <div id="hook_button" class="my-3">
           <p id="hook_text">{{ post.hook_text }}</p>
         </div>
