@@ -1,4 +1,5 @@
 {% extends 'shopping/base.html' %}
+{% load crispy_forms_tags %}
 {% load humanize %}
 {% block main_area %}
   <div class="container my-5">
@@ -25,5 +26,37 @@
   <div class="m-5">
     <h3>제품 상세정보</h3>
     <p>{{ post.get_content_markdown | safe }}</p>
+  </div>
+  <!-- Comments section-->
+  <div class="mb-5" id="comment-area">
+    <div class="card bg-light">
+      <div class="card-body">
+        <!-- Comment form-->
+        {% if user.is_authenticated %}
+        <form class="mb-4" id="comment-form" method="POST" action="{{post.get_absolute_url}}new_comment/">
+          {% csrf_token %}
+          <div class="form-group">
+            {{comment_form | crispy}}
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% else %}
+        <a role="button" class="btn btn-outline-dark" href="#"
+          data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+        {% endif %}
+        <!-- Single comment-->
+        {% if post.comment_set.exists %}
+        {% for comment in post.comment_set.all %}
+        <div class="d-flex" id="comment-{{comment.pk}}">
+          <div class="ms-3">
+            <div class="fw-bold">{{comment.author.username}} &nbsp;&nbsp;&nbsp; 
+              <small class="text-muted">{{comment.created_at}}</small></div>
+            <p>{{comment.content | linebreaks}}</p>
+          </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
   </div>
 {% endblock %}
