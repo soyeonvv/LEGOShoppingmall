@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Post, Category
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 
@@ -26,9 +27,20 @@ class PostDetail(DetailView):
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['product_name', 'hook_text', 'content', 'head_image', 'price', 'age', 'pcs', 'Manufacturer', 'category']
+
+    def test_func(self) :
+        return self.request.user.is_superuser or self.request.user.is_staff
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
+            form.instance.author = current_user
+            return super(PostCreate,self).form_valid(form)
+        else :
+            return redirect('/shopping/')
 
 def category_page(request, slug):
     if slug == 'no_category' :
