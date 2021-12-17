@@ -2,14 +2,26 @@ from django.db import models
 
 # Create your models here.
 class Manufacturer(models.Model):
-    company = models.CharField(max_length=30)
+    company = models.CharField(max_length=30, unique=True)
     address = models.CharField(max_length=200)
     contact_numbers = models.CharField(max_length=15)
     country = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.company
+
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/shopping/category/{self.slug}/'
 
 class Post(models.Model):
     # 상품명
@@ -28,9 +40,11 @@ class Post(models.Model):
     pcs = models.IntegerField()
     # 제조사
     Manufacturer = models.ForeignKey(Manufacturer, null=True, blank=True, on_delete=models.CASCADE)
+    # 카테고리
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'[{self.pk}]{self.product_name}'
+        return f'[{self.pk}]{self.product_name} - {self.Manufacturer}'
 
     def get_absolute_url(self):
         return f'/shopping/{self.pk}/'

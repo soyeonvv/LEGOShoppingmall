@@ -3,25 +3,36 @@
 {% block main_area %}
   <!-- Product post-->
   <div class="container my-5">
-    <div class="row">
+    {% if category %}
+      <div class="category-badge">{{ category }}</div>
+    {% endif %}
+    <div class="row g-2">
+      {% if post_list.exists %}
       {% for p in post_list %}
-        <div class="col-lg-4 col-sm-6">
-          <div class="card" style="width: 20rem;">
-            <img src="{{ p.head_image.url }}" style="width: 19rem; height: 15rem;" class="card-img-top" alt="{{ p }}의 이미지">
-            <div class="card-body">
-              <div id="hook_button">
-                <p id="hook_text">{{ p.hook_text }}</p>
-              </div>
-              <h5 class="card-title">{{ p.product_name }}</h5>
-              <p class="card-text">{{ p.price | intcomma }} 원</p>
-              <a href="{{ p.get_absolute_url }}" class="btn btn-primary">제품 보러가기</a>
+      <div class="col-lg-4 col-sm-6">
+        <div class="card" style="width: 20rem;">
+          <img src="{{ p.head_image.url }}" style="width: 19rem; height: 15rem;" class="card-img-top" alt="{{ p }}의 이미지">
+          <div class="card-body">
+            <div id="hook_button">
+              <p id="hook_text">{{ p.hook_text }}</p>
             </div>
+            {% if p.category %}
+            <div id="category_button">
+              <a href="{{ p.category.get_absolute_url }}" style="text-decoration: none;"><p id="hook_text" style="color: #ffffff">{{ p.category }}</p></a>
+            </div>
+            {% endif %}
+            <h5 class="card-title">{{ p.product_name }}</h5>
+            <p class="card-text">{{ p.price | intcomma }} 원</p>
+            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">제품 보러가기</a>
           </div>
         </div>
+      </div>
       {% endfor %}
+      {% else %}
+      <h2>등록된 상품이 없습니다.</h2>
+      {% endif %}
     </div>
   </div>
-
 
   <!-- Pagination-->
   {% if is_paginated %}

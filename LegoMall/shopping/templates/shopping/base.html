@@ -12,8 +12,30 @@
     {% include 'shopping/navbar.html' %}
   </header>
   <main>
-    {% block main_area %}
-    {% endblock %}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10">
+          {% block main_area %}
+          {% endblock %}
+        </div>
+        <div class="col-lg-2">
+          <!-- Categories widget-->
+          <div class="categories-card">
+            <div class="category-text">카테고리</div>
+            <div class="categories">
+              <ul>
+                {% for c in categories %}
+                  <li><a href="{{ c.get_absolute_url }}">{{ c }} ({{ c.post_set.count }})</a></li>
+                {% endfor %}
+                <li><a href="http://127.0.0.1:8000/shopping/category/no_category">미분류 ({{ no_category_post_count }})</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
   </main>
 
   {% include 'shopping/footer.html' %}
