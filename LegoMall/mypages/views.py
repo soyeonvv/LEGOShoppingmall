@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shopping.models import Post
+from shopping.models import Post, Manufacturer, Category
 
 # Create your views here.
 def homepage(request):
@@ -9,3 +9,9 @@ def homepage(request):
 
 def mypage(request) :
     return render(request, 'mypages/mypage.html')
+
+def manufacturer(request) :
+    manufacturers = Manufacturer.objects.all()
+    categories = Category.objects.all()
+    no_category_post_count = Post.objects.filter(category=None).count()
+    return render(request, 'mypages/company.html', {'manufacturers' : manufacturers, 'categories' : categories, 'no_category_post_count' : no_category_post_count})

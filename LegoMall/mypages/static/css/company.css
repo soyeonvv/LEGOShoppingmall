@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Cafe24SsurroundAir';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.manufacturer-box {
+  display: inline-block;
+  margin: 20px;
+}
+
+.manufacturer-title {
+  font-size: x-large;
+}
+
+.manufacturer-text {
+  margin-top: 10px;
+  line-height: 40px;
+}
+
+#showmodal {
+  background-color: #FD8024;
+  display: inline-block;
+  width: 350px;
+  height: 40px;
+  text-align: center;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+#showmodal-text {
+  padding-top: 7px;
+  color: #ffffff;
+  font-size: large;
+  font-family: 'Cafe24SsurroundAir';
+}
+
+#showmodal:hover {
+  background-color: #fcb17c;
+  cursor: pointer;
+}
