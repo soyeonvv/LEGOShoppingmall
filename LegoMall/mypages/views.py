@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from shopping.models import Post, Manufacturer, Category
+from shopping.models import Post, Manufacturer, Category, Comment
 
 # Create your views here.
 def homepage(request):
@@ -8,7 +8,9 @@ def homepage(request):
                 {'recent_posts' : recent_posts})
 
 def mypage(request) :
-    return render(request, 'mypages/mypage.html')
+    writer = request.user
+    comments = Comment.objects.filter(author=writer).order_by('-created_at')
+    return render(request, 'mypages/mypage.html', context={'comments':comments})
 
 def manufacturer(request) :
     manufacturers = Manufacturer.objects.all()

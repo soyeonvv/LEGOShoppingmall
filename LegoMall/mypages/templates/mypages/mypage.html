@@ -11,9 +11,40 @@
   {% include 'shopping/navbar.html' %}
   <div class="container my-5">
     <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
-    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">마이페이지</h2>
+    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">회원정보</h2>
     <br>
+    <div class="row">
+      <div class="col-2">
+        {% if user.socialaccount_set.all.0.get_avatar_url %}
+        <img id="userimg" class="rounded-circle" width="100px"
+          src="{{user.socialaccount_set.all.0.get_avatar_url}}">
+        {% else %}
+        <img id="userimg" class="rounded-circle" width="200px"
+          src="https://doitdjango.com/avatar/id/479/e83ecdebe964d430/svg/{self.author.email}/">
+        {% endif %}
+      </div>
+      <div id="infobox" class="col-10">
+        <div id="user-text">
+          {{user.username}} 님
+        </div>
+        {% if user.email %}
+        <div id="user-text">
+          등록한 이메일: {{ user.email}}
+        </div>
+        {% endif %}
+      </div>
+    </div>
   </div>
+
+  <div class="container my-5">
+    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">내가 쓴 댓글 💬</h2>
+    <br>
+    {% for comment in comments %}
+    <li id="comment-list"><a href="{{ comment.get_absolute_url }}" style="text-decoration: none;">{{comment}}</a></li>
+    <hr>
+    {% endfor %}
+  </div>
+
   {% include 'shopping/footer.html' %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

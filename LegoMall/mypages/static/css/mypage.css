@@ -4,3 +4,28 @@
   font-weight: normal;
   font-style: normal;
 }
+
+#user-text {
+  font-size: x-large;
+  font-weight: bold;
+  color: #727272;
+}
+
+#infobox {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#comment-list {
+  list-style-type: none;
+  margin: 10px 0 10px 0;
+}
+
+#comment-list > a {
+  font-size: large;
+  color: inherit;
+}
+
+#comment-list > a:hover {
+  color: #B8B5E1;
+}
