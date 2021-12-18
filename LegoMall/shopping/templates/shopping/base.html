@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="ko">
 <head>
-  <title>Document</title>
+  <title>LegoMall-쇼핑하기</title>
   <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
   <script src="https://kit.fontawesome.com/cd5dfd4385.js" crossorigin="anonymous"></script>
@@ -19,6 +19,27 @@
           {% endblock %}
         </div>
         <div class="col-lg-2">
+          {% if search_info or category %}
+          <!-- Search widget-->
+          <div class="search-card" style="margin-top: 115px;">
+            <div class="input-group">
+              <input class="form-control" type="text" id="search-input" placeholder="검색..." aria-label="검색..." aria-describedby="button-search" />
+              <button class="btn" id="button-search" type="button" onclick="searchPost()"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <!-- Categories widget-->
+          <div class="categories-card">
+            <div class="category-text">카테고리</div>
+            <div class="categories">
+              <ul>
+                {% for c in categories %}
+                  <li><a href="{{ c.get_absolute_url }}">{{ c }} ({{ c.post_set.count }})</a></li>
+                {% endfor %}
+                <li><a href="http://127.0.0.1:8000/shopping/category/no_category">미분류 ({{ no_category_post_count }})</a></li>
+              </ul>
+            </div>
+          </div>
+          {% else %}
           <!-- Search widget-->
           <div class="search-card">
             <div class="input-group">
@@ -38,6 +59,7 @@
               </ul>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div> 
@@ -54,6 +76,16 @@
     document.getElementById('search-input').addEventListener('keyup', function(event) {
       if(event.key == 'Enter')
         searchPost();
+    })
+
+    var details = document.querySelector("details")
+    var icon = document.getElementById("detailsicon")
+
+    details.addEventListener("toggle", function() {
+      if(details.open)
+        icon.className = "fas fa-minus";
+      else
+        icon.className = "fas fa-plus";
     })
   </script>
 

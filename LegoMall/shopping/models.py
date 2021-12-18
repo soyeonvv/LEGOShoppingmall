@@ -47,6 +47,8 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     # 작성자
     author = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
+    # 작성시간
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.product_name} - {self.Manufacturer}'
@@ -68,3 +70,9 @@ class Comment(models.Model) :
 
     def get_absolute_url(self):
         return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists() :
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else :
+            return 'https://doitdjango.com/avatar/id/479/e83ecdebe964d430/svg/{self.author.email}/'

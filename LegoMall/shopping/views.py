@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 
-from .models import Post, Category
+from .models import Manufacturer, Post, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -34,7 +34,7 @@ class PostSearch(PostList) :
     def get_context_data(self, **kwargs):
         context = super(PostSearch, self).get_context_data()
         q = self.kwargs['q']
-        context['search_info'] = f'Search : {q}({self.get_queryset().count()})'
+        context['search_info'] = f'{q} 검색결과 {self.get_queryset().count()}건'
         return context
 
 class PostDetail(DetailView):

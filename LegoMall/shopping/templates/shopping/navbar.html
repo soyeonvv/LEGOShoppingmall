@@ -26,10 +26,20 @@
         {% endif %}
       </ul>
       {% if user.is_authenticated %}
+      {% if user.socialaccount_set.all.0.get_avatar_url %}
+        <img id="userimg" class="rounded-circle" width="30px"
+          src="{{user.socialaccount_set.all.0.get_avatar_url}}">
+        {% else %}
+        <img id="userimg" class="rounded-circle" width="25px"
+          src="https://doitdjango.com/avatar/id/479/e83ecdebe964d430/svg/{self.author.email}/">
+      {% endif %}
       <div id="username">
         {{user.username}} 님
       </div>
-      <div id="logout"><a role="button" style="text-decoration: none; color: inherit;"href="/accounts/logout/">로그아웃</a></div>
+      {% if user.is_staff or user.is_superuser %}
+      <div id="create"><a style="text-decoration: none; color: inherit;" href="/shopping/create_post">상품 등록</a></div>
+      {% endif %}
+      <div id="logout"><a role="button" style="text-decoration: none; color: inherit;" href="/accounts/logout/">로그아웃</a></div>
       {% else %}
       <div id="login"><a role="button" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></div>
       {% endif %}

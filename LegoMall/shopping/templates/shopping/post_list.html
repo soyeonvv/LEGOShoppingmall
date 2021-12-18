@@ -1,26 +1,22 @@
 {% extends 'shopping/base.html' %}
+{% load static %}
 {% load humanize %}
 {% block main_area %}
-  {% if user.is_authenticated %}
-    {% if user.is_staff or user.is_superuser %}
-      <a class="btn btn-info btn-small float-right" href="/shopping/create_post" style="padding-top: 20px;">
-        상품 등록
-      </a>
-    {% endif %}
-  {% endif %}
   <!-- Product post-->
   <div class="container my-5">
     {% if search_info %}
+    <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
     <div class="category-badge">{{ search_info }}</div>
     {% endif %}
     {% if category %}
+      <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
       <div class="category-badge">{{ category }}</div>
     {% endif %}
     <div class="row g-2">
       {% if post_list.exists %}
       {% for p in post_list %}
       <div class="col-lg-4 col-sm-6">
-        <div class="card" style="width: 20rem;">
+        <div class="card h-100" style="width: 20rem;">
           <img src="{{ p.head_image.url }}" style="width: 19rem; height: 15rem;" class="card-img-top" alt="{{ p }}의 이미지">
           <div class="card-body">
             <div id="hook_button">
@@ -31,9 +27,12 @@
               <a href="{{ p.category.get_absolute_url }}" style="text-decoration: none;"><p id="hook_text" style="color: #ffffff">{{ p.category }}</p></a>
             </div>
             {% endif %}
-            <h5 class="card-title">{{ p.product_name }}</h5>
+            <h5 class="card-title" style="font-weight: bold;">{{ p.product_name }}</h5>
             <p class="card-text">{{ p.price | intcomma }} 원</p>
-            <a href="{{ p.get_absolute_url }}" class="btn btn-primary">제품 보러가기</a>
+            <p class="card-text">{{ p.get_content_markdown | truncatewords_html:15 | safe }}</p> 
+          </div>
+          <div class="detail">
+            <a href="{{ p.get_absolute_url }}" class="btn detailbtn">제품 보러가기</a>
           </div>
         </div>
       </div>

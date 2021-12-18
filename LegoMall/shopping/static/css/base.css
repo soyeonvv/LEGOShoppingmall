@@ -45,7 +45,6 @@ body {
 }
 
 #logout {
-  
   margin-right: 50px;
   width: 80px;
   height: 30px;
@@ -93,6 +92,10 @@ body {
 }
 
 #username {
+  margin-right: 10px;
+}
+
+#userimg {
   margin-left: auto;
   margin-right: 10px;
 }
@@ -114,7 +117,58 @@ body {
   margin-right: auto;
 }
 
+.detail {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.detailbtn {
+  background-color: #FD8024;
+}
+
+.detailbtn:hover {
+  color: white;
+}
+
+#create {
+  margin-right: 10px;
+  width: 80px;
+  height: 30px;
+  border: 3px solid #D01012;
+  border-radius: 7px;
+  background-color: #D01012;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#create:hover {
+  border: 3px solid #ffffff;
+  background-color: #ffffff;
+  color: #D01012;
+  text-align: right;
+  float: right;
+}
+
+.modifytext {
+  text-align: right;
+}
+
+.modify {
+  text-decoration: none; 
+  color: #D01012;
+  font-weight: bold;
+}
+
+.legoicon {
+  display: inline-block;
+  width: 47px;
+  height: 53px;
+  margin-bottom: 13px;
+}
+
 .category-badge {
+  display: inline-block;
   font-size: 20px;
   margin-bottom: 15px;
 }
@@ -130,7 +184,7 @@ body {
 }
 
 .search-card {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 #button-search {
@@ -139,6 +193,7 @@ body {
 
 .categories-card {
   margin-top: 20px;
+  margin-bottom: 20px;
   border: 2px solid #E0E0E0;
   border-radius: 5px;
   width: 180px;
@@ -165,6 +220,45 @@ body {
   text-decoration: none;
   color: #000000;
 }
+
+/* post_detal */
+.accordion-button.collapsed {
+  background: #ffffff;
+}
+
+#product-table {
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
+  padding-top: 5px;
+}
+
+#product-table-text {
+  text-align: center;
+  padding-top: 3px;
+}
+
+#product-table-content {
+  text-align: center;
+  font-size: 40px;
+  font-weight: lighter;
+}
+
+summary::marker{
+  display: none;
+  content: "";
+}
+
+details[open] summary::marker {
+  content: "";
+}
+
+#submitbtn {
+  background-color: #FFCF00;
+  margin: 10px 0 5px 0;
+  float: right;
+}
+
+/* footer */
 
 footer {
   background-color: #201D48;

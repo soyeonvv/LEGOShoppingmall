@@ -1,4 +1,5 @@
 {% extends 'shopping/base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% load humanize %}
 {% block main_area %}
@@ -8,55 +9,101 @@
         <img src="{{ post.head_image.url }}" class="card-img-top" alt="{{ post.product_name }}의 이미지">
       </div>
       <div class="col-4">
-        {% if user.is_authenticated and user == post.author %}
-          <a href="/shopping/update_post/{{post.pk}}/" class="btn btn-info btn-sm float-right">
-            상품 수정
-          </a>
-        {% endif %}
         <div id="hook_button" class="my-3">
           <p id="hook_text">{{ post.hook_text }}</p>
         </div>
-        <h2>{{ post.product_name }}</h2>
+        {%  if post.category %}
+        <div id="category_button" class="my-3">
+          <a href="{{ post.category.get_absolute_url }}" style="text-decoration: none;"><p id="hook_text" style="color: #ffffff">{{ post.category }}</p></a>
+        </div>
+        {% endif %}
+        <h2 style="font-weight: bold;">{{ post.product_name }}</h2>
         <br>
         <h4>{{ post.price | intcomma }} 원</h4>
+        <br>
+        <div class="row" id="product-table">
+          <div class="col-4">
+            <div id="product-table-text">연령</div>
+            <div id="product-table-content">
+              {{ post.age }}+
+            </div>
+          </div>
+          <div class="col-4">
+            <div id="product-table-text">부품수</div> 
+            <div id="product-table-content">
+              {{ post.pcs }}
+            </div>
+          </div>
+          <div class="col-4">
+            <p style="padding-top: 3px;">
+              경고!<img src="{% static 'image/warningicon.png' %}" style="width:32px; height: 28px;"><br>
+              조그만 부품.<br>
+              질식 위험.
+            </p>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
   <hr>
   <div class="m-5">
     <h3>제품 상세정보</h3>
+    {% if user.is_authenticated and user == post.author %}
+    <div class="modifytext">
+      <a class="modify" href="/shopping/update_post/{{post.pk}}/">상품 수정</a>
+    </div>
+    {% endif %}
     <p>{{ post.get_content_markdown | safe }}</p>
-  </div>
-  <!-- Comments section-->
-  <div class="mb-5" id="comment-area">
-    <div class="card bg-light">
-      <div class="card-body">
-        <!-- Comment form-->
-        {% if user.is_authenticated %}
-        <form class="mb-4" id="comment-form" method="POST" action="{{post.get_absolute_url}}new_comment/">
-          {% csrf_token %}
-          <div class="form-group">
-            {{comment_form | crispy}}
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        {% else %}
-        <a role="button" class="btn btn-outline-dark" href="#"
-          data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
-        {% endif %}
-        <!-- Single comment-->
-        {% if post.comment_set.exists %}
-        {% for comment in post.comment_set.all %}
-        <div class="d-flex" id="comment-{{comment.pk}}">
-          <div class="ms-3">
-            <div class="fw-bold">{{comment.author.username}} &nbsp;&nbsp;&nbsp; 
-              <small class="text-muted">{{comment.created_at}}</small></div>
-            <p>{{comment.content | linebreaks}}</p>
-          </div>
+    <br>
+    <h6 style="text-align: right;">상품 등록일: {{ post.created_at | date:'20y년 m월 d일 H:i' }}</h6>
+    <br>
+    <div>
+      <details>
+        <summary>
+          <h3>제조사 정보 &nbsp;<i id="detailsicon" class="fas fa-plus"></i></h3>
+        </summary>
+        <div style="padding-top: 10px;">
+          회사: {{ post.Manufacturer }}<br>
+          회사 주소: {{ post.Manufacturer.address }}<br>
+          회사 번호: {{post.Manufacturer.contact_numbers }}<br>
+          제조국: {{ post.Manufacturer.country }}<br>
         </div>
-        {% endfor %}
-        {% endif %}
+      </details>
+    </div>
+    <!-- Comments section-->
+    <div class="my-5" id="comment-area">
+      <div class="card">
+        <div class="card-body">
+          <!-- Comment form-->
+          {% if user.is_authenticated %}
+          <form class="mb-4" id="comment-form" method="POST" action="{{post.get_absolute_url}}new_comment/">
+            {% csrf_token %}
+            <div class="form-group">
+              {{comment_form | crispy}}
+            </div>
+            <button type="submit" class="btn" id="submitbtn">등록</button>
+          </form>
+          {% else %}
+          <a role="button" class="btn btn-outline-dark" href="#"
+            data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+          {% endif %}
+          <!-- Single comment-->
+          {% if post.comment_set.exists %}
+          {% for comment in post.comment_set.all %}
+          <div class="d-flex" id="comment-{{comment.pk}}">
+            <div class="flex-shrink-0"><img class="rounded-circle" src="{{comment.get_avatar_url}}" alt="{{comment.author}}" width="45px"/></div>
+            <div class="ms-3">
+              <div class="fw-bold">{{comment.author.username}} &nbsp;&nbsp;&nbsp; 
+                <small class="text-muted">{{comment.created_at}}</small></div>
+              <p>{{comment.content | linebreaks}}</p>
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
+  
 {% endblock %}
