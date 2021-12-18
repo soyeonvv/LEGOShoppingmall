@@ -30,11 +30,11 @@ class Post(models.Model):
     # 상품명
     product_name = models.CharField(max_length=50)
     # 간단한 설명
-    hook_text = models.CharField(max_length=100, blank=True)
+    hook_text = models.CharField(max_length=100)
     # 상품 설명
     content = MarkdownxField()
     # 상품 이미지
-    head_image = models.ImageField(upload_to='lego/images/', blank=True)
+    head_image = models.ImageField(upload_to='lego/images/')
     # 가격
     price = models.IntegerField()
     # 연령
