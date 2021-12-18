@@ -1,17 +1,92 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="ko">
 <head>
-  <title>Document</title>
+  <title>LegoMall - 홈페이지</title>
   <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" media="screen">
 </head>
 <body>
   {% include 'shopping/navbar.html' %}
-  <h2>홈페이지</h2>
-  {% include 'shopping/footer.html' %}
+  <div class="container my-5">
+    <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
+    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">홈페이지</h2>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{% static 'image/main1.png' %}" class="d-block w-100" alt="대표이미지">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'image/main2.png' %}" class="d-block w-100" alt="대표이미지">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'image/main3.jpg' %}" class="d-block w-100" alt="대표이미지">
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <img class= "intro-logo" src="{% static 'image/logo.png' %}">
+        <div class="intro-title">&nbsp;소개</div>
+        <div class="intro-text">
+          레고몰은 레고 그룹과 레고 코리아 두 회사의 레고 상품들을 살펴볼 수 있는 쇼핑몰 사이트입니다.<br>
+          디즈니, 해리포터, 미키마우스, 마블 등 다양하고 재미있는 레고 상품을 구경하세요.<br>
+          다양한 연령대의 레고 상품들이 준비되어 있습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container my-3">
+    <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
+    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">최신 상품</h2>
+    <br>
+  </div>
+  
+  <div class="container mb-5">
+    <div class="row">
+      {% for post in recent_posts %}
+      <div class="col-4">
+        <div class="card h-100" style="width: 20rem;">
+          <img src="{{ post.head_image.url }}" style="width: 19rem; height: 15rem;" class="card-img-top" alt="{{ post.product_name }}의 이미지">
+          <div class="card-body">
+            <div id="hook_button">
+              <p id="hook_text">{{ post.hook_text }}</p>
+            </div>
+            {% if post.category %}
+            <div id="category_button">
+              <a href="{{ post.category.get_absolute_url }}" style="text-decoration: none;"><p id="hook_text" style="color: #ffffff">{{ post.category }}</p></a>
+            </div>
+            {% endif %}
+            <h5 class="card-title" style="font-weight: bold;">{{ post.product_name }}</h5>
+            <p class="card-text">{{ post.price | intcomma }} 원</p>
+            <p class="card-text">{{ post.get_content_markdown | truncatewords_html:15 | safe }}</p> 
+          </div>
+          <div class="detail">
+            <a href="{{ post.get_absolute_url }}" class="btn detailbtn">제품 보러가기</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 
+  {% include 'shopping/footer.html' %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </body>

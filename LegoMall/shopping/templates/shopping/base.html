@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="ko">
 <head>
-  <title>LegoMall-쇼핑하기</title>
+  <title>{% block head_title %}LegoMall - 쇼핑하기{% endblock %}</title>
   <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
   <script src="https://kit.fontawesome.com/cd5dfd4385.js" crossorigin="anonymous"></script>

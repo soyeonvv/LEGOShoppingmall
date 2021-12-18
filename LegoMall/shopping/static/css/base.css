@@ -160,6 +160,10 @@ body {
   font-weight: bold;
 }
 
+.modify:hover {
+  color: #1033d0;
+}
+
 .legoicon {
   display: inline-block;
   width: 47px;
@@ -221,7 +225,7 @@ body {
   color: #000000;
 }
 
-/* post_detal */
+/* post_detail */
 .accordion-button.collapsed {
   background: #ffffff;
 }
@@ -256,6 +260,37 @@ details[open] summary::marker {
   background-color: #FFCF00;
   margin: 10px 0 5px 0;
   float: right;
+}
+
+#commentbtn {
+  border: 2px solid #FFCF00;
+  width: 60px;
+  height: 30px;
+  padding: 0;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+#commentbtn:hover {
+  border: 2px solid #D01012;
+  background-color: #D01012;
+  color: #ffffff;
+}
+
+/* Pagination */
+
+.pagination > li > a {
+  color: #201D48;
+}
+
+.my.pagination > .active > a, 
+.my.pagination > .active > span, 
+.my.pagination > .active > a:hover, 
+.my.pagination > .active > span:hover, 
+.my.pagination > .active > a:focus, 
+.my.pagination > .active > span:focus {
+  background: #201D48;
+  border-color: #201D48;
 }
 
 /* footer */
