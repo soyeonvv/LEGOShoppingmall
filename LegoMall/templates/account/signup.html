@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "LegoMall - 회원가입" %}{% endblock %}
+
+{% block content %}
+<img class="legoicon" src="{% static 'image/lego_icon.png' %}" style="display:inline-block;">
+<h2 style="display:inline-block;">{% trans "회원가입" %}</h2>
+
+<p>{% blocktrans %}이미 계정이 있으신가요? <a href="{{ login_url }}" style="text-decoration: none; font-weight: bold;">로그인</a>{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit" style="background-color: #FFCF00; border-radius: 5px; border: 0; outline: 0; margin-bottom: 182px;">{% trans "회원가입" %}</button>
+</form>
+
+{% endblock %}

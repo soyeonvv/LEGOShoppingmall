@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "LegoMall - 로그아웃" %}{% endblock %}
+
+{% block content %}
+<img class="legoicon" src="{% static 'image/lego_icon.png' %}" style="display:inline-block;">
+<h2 style="display:inline-block;">{% trans "로그아웃" %}</h2>
+
+<p>{% trans '정말로 로그아웃 하시겠습니까?' %}</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button type="submit" style="background-color: #FFCF00; border-radius: 5px; border: 0; outline: 0; margin: 10px 0 355px 0;">{% trans 'Sign Out' %}</button>
+</form>
+
+
+{% endblock %}

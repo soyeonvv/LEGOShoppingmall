@@ -1,0 +1,20 @@
+{% extends "socialaccount/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+{% if process == "connect" %}
+<h1>{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
+
+<p>{% blocktrans with provider.name as provider %}You are about to connect a new third party account from {{ provider }}.{% endblocktrans %}</p>
+{% else %}
+<img class="legoicon" src="{% static 'image/lego_icon.png' %}" style="display:inline-block;">
+<h2 style="display:inline-block;">{% blocktrans with provider.name as provider %}소셜 로그인{% endblocktrans %}</h2>
+
+<p>{% blocktrans with provider.name as provider %}{{ provider }}계정으로 로그인{% endblocktrans %}</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" style="background-color: #FFCF00; border-radius: 5px; border: 0; outline: 0; margin-bottom: 366px;">{% trans "Continue" %}</button>
+</form>
+{% endblock %}
