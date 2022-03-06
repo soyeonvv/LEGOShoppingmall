@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'markdownx',
     'shopping',
     'mypages',
+    'cart',
 ]
 
 MIDDLEWARE = [

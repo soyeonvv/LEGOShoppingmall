@@ -33,6 +33,7 @@
           </div>
           <div class="detail">
             <a href="{{ p.get_absolute_url }}" class="btn detailbtn">제품 보러가기</a>
+            <a href="{% url 'cart:add_cart' p.id %}"><i class="fas fa-shopping-cart"></i></a>
           </div>
         </div>
       </div>
