@@ -7,6 +7,7 @@
   <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/homepage.css' %}" rel="stylesheet" type="text/css" media="screen">
+  <script src="https://kit.fontawesome.com/cd5dfd4385.js" crossorigin="anonymous"></script>
 </head>
 <body>
   {% include 'shopping/navbar.html' %}
@@ -79,6 +80,12 @@
           </div>
           <div class="detail">
             <a href="{{ post.get_absolute_url }}" class="btn detailbtn">제품 보러가기</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart:add_cart' post.id %}" class="btn cartbtn"><i class="fas fa-shopping-cart"></i></a>
+            {% else %}
+            <a class="btn cartbtn" href="#"
+            data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-shopping-cart"></i></a>
+            {% endif %}
           </div>
         </div>
       </div>

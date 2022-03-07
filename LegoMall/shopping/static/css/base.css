@@ -130,6 +130,16 @@ body {
   color: white;
 }
 
+.cartbtn {
+  background-color: ffffff;
+  border: 2px solid #FD8024;
+}
+
+.cartbtn:hover {
+  background-color: #FD8024;
+  color: #ffffff;
+}
+
 #create {
   margin-right: 10px;
   width: 80px;
@@ -275,6 +285,21 @@ details[open] summary::marker {
   border: 2px solid #D01012;
   background-color: #D01012;
   color: #ffffff;
+}
+
+.addcart {
+  border: 2px solid;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #ffffff;
+  color: #D01012;
+}
+
+.addcart:hover {
+  color: #ffffff;
+  background-color: #D01012;
 }
 
 /* Pagination */

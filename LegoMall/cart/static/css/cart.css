@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Cafe24SsurroundAir';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+table th {
+  text-align: center;
+  border-top: 2px solid #B8B5E1;
+  border-bottom: 2px solid #B8B5E1;
+  padding: 10px;
+}
+
+table td {
+  padding: 10px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+td a {
+  text-decoration: none;
+  color: #000000;
+}
+
+td a:hover {
+  color: #B8B5E1;
+}
+
+.keeptext {
+  text-decoration: none; 
+  color: black;
+}
+
+.keeptext:hover {
+  color: #B8B5E1;
+}
+
+.totalcart {
+  border: 2px solid #B8B5E1;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.total {
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+.shoppingbox {
+  text-align: center;
+  border: 2px solid #B8B5E1;
+  border-radius: 7px;
+  margin: 25px 10px 10px 10px;
+  padding: 7px;
+}
+
+.orderbox {
+  text-align: center;
+  border: 2px solid #B8B5E1;
+  border-radius: 7px;
+  background-color: #B8B5E1;
+  margin: 10px 10px 5px 10px;
+  padding: 7px;
+}
+
+.shoppingbox:hover {
+  background-color: #B8B5E1;
+  color: #FFFFFF;
+}
+
+.orderbox:hover {
+  background-color: #FFFFFF;
+}

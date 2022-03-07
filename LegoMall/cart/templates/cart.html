@@ -1,16 +1,76 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="ko">
 <head>
-  <title>LegoMall - 홈페이지</title>
+  <title>LegoMall - 장바구니</title>
   <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
   <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" media="screen">
-  <link href="{% static 'css/mypage.css' %}" rel="stylesheet" type="text/css" media="screen">
+  <link href="{% static 'css/cart.css' %}" rel="stylesheet" type="text/css" media="screen">
+  <script src="https://kit.fontawesome.com/cd5dfd4385.js" crossorigin="anonymous"></script>
 </head>
 <body>
   {% include 'shopping/navbar.html' %}
-  <h1>장바구니</h1>
-
+  <div class="container my-5">
+    <img class="legoicon" src="{% static 'image/lego_icon.png' %}">
+    <h2 style="display: inline-block; font-family: 'Cafe24SsurroundAir';">장바구니</h2>
+    {% if not cart_items %}
+    <h4 style="font-family: 'Cafe24SsurroundAir'; margin: 10px 0 20px 0;">장바구니가 비었습니다.</h4>
+    <a href="/shopping" class="keeptext">👉쇼핑 계속하기</a>
+    {% else %}
+    <h4 style="font-family: 'Cafe24SsurroundAir'; margin: 10px 0 15px 0; font-weight: 550;">장바구니 상품 ({{ counter }})</h4>
+    <div class="row">
+      <div class="col-9">
+        <table>
+          <th>상품정보</th>
+          <th>수량</th>
+          <th>가격</th>
+          <th>상품금액</th>
+          <th style="padding-right: 20px;">삭제</th>
+          {% for cart_item in cart_items %}
+          <tr>
+            <td>
+              <a href="{{cart_item.post.get_absolute_url}}">
+                <img src="{{ cart_item.post.head_image.url }}" style="width: 15rem; height: 12rem;">
+                {{ cart_item.post.product_name }}
+              </a>
+            </td>
+            <td style="text-align: center;">
+              <a href="{% url 'cart:cart_remove' cart_item.post.pk %}">
+                <i class="fas fa-minus-circle"></i>
+              </a>
+              {{ cart_item.quantity }}
+              <a href="{% url 'cart:add_cart' cart_item.post.pk %}">
+                <i class="fas fa-plus-circle"></i>
+              </a>
+            </td>
+            <td style="text-align: center;">
+              {{ cart_item.post.price | intcomma }}
+            </td>
+            <td style="text-align: center;">
+              {{ cart_item.sub_total | intcomma }}원
+            </td>
+            <td style="text-align: center;">
+              <a href="{% url 'cart:full_remove' cart_item.post.pk %}">
+                <i class="far fa-trash-alt"></i>
+              </a>      
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="col-3">
+        <div class="totalcart">
+          <p class="total">주문금액</p>
+          <hr>
+          총 결제금액: <span style="float: right;"><span style="color: red; font-weight: bold;">{{ total | intcomma }}</span> 원</span>
+          <a href="/shopping" style="text-decoration: none; color: black;"><div class="shoppingbox">쇼핑 계속하기</div></a>
+          <a href="#" style="text-decoration: none; color: black;"><div class="orderbox">주문하기</div></a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
   {% include 'shopping/footer.html' %}
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
